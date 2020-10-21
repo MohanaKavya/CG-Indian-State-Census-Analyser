@@ -22,8 +22,9 @@ public class StateCensusAnalyserTest {
 	private static final String WRONG_CSV_DELIMITER = "./src/test/resources/IndiaStateCensusDataWrongDelimiter.csv";
 	private static final String WRONG_CSV_HEADER = "C:\\Users\\Mohana Kavya\\eclipse-workspace\\indiancensusanalyser\\src"
 													+ "\\test\\resources\\IndiaStateCensusDataWrongHeader.csv";
+	private static final String INDIA_STATECODE_CSV_FILE_PATH = "./src/test/resources/IndiaStateCode.csv";
 
-    // Happy Test Case
+    // Happy Test Case - India State Census CSV File
     @Test
     public void givenIndianCensusCSVFileReturnsCorrectRecords() {
         try {
@@ -34,6 +35,17 @@ public class StateCensusAnalyserTest {
         	log.severe("Exception occured : "+e.getMessage());
         }
     }
+    // Happy Test Case - State Code CSV File
+    @Test
+	public void givenIndianStateCodeCSVFileReturnsCorrectRecords() {
+        StateCensusAnalyser censusAnalyser = new StateCensusAnalyser();
+        try {
+			int numOfRecords = censusAnalyser.loadStateCode(INDIA_STATECODE_CSV_FILE_PATH);
+			Assert.assertEquals(37, numOfRecords);
+		} catch (CensusAnalyserException e) {
+        	log.severe("Exception occured : "+e.getMessage());
+		}
+	}
     // Sad Test Case
     @Test
 	public void givenIndiaCensusData_WithWrongFile_ShouldThrowException() {
@@ -80,4 +92,6 @@ public class StateCensusAnalyserTest {
 		}
 		Assert.assertEquals(ExceptionType.CENSUS_FILE_PROBLEM, typeActual);
 	}
+    
+    
 }
