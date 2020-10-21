@@ -20,6 +20,8 @@ public class StateCensusAnalyserTest {
     private static final String WRONG_CSV_FILE_PATH = "./src/main/resources/IndiaStateCensusData.csv";
     private static final String WRONG_CSV_FILE_TYPE="./src/test/resources/IndiaStateCensusData.java";
 	private static final String WRONG_CSV_DELIMITER = "./src/test/resources/IndiaStateCensusDataWrongDelimiter.csv";
+	private static final String WRONG_CSV_HEADER = "C:\\Users\\Mohana Kavya\\eclipse-workspace\\indiancensusanalyser\\src"
+													+ "\\test\\resources\\IndiaStateCensusDataWrongHeader.csv";
 
     // Happy Test Case
     @Test
@@ -64,5 +66,18 @@ public class StateCensusAnalyserTest {
 			Assert.assertEquals(ExceptionType.CENSUS_FILE_PROBLEM, e.type);
         	log.severe("Exception occured - Wrong Delimiter: "+e.getMessage());
 		}
+	}
+    // Sad Test Case
+    @Test
+	public void givenMissingHeader_InIndiaCensusData_ShouldReturnCustomExceptionType() {
+		StateCensusAnalyser censusAnalyser = new StateCensusAnalyser();
+		ExceptionType typeActual = null;
+		try {
+			censusAnalyser.loadStateCensus(WRONG_CSV_HEADER);
+		} catch (CensusAnalyserException e) {
+			typeActual = e.type;
+			log.severe("Exception occured - Wrong Header: "+e.getMessage());
+		}
+		Assert.assertEquals(ExceptionType.CENSUS_FILE_PROBLEM, typeActual);
 	}
 }

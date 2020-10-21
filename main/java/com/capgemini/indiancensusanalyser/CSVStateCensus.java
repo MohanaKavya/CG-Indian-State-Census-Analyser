@@ -29,7 +29,7 @@ public class CSVStateCensus {
 	}
 
 	/**
-	 * default constructor
+	 * 
 	 */
 	public CSVStateCensus() {
 	}
