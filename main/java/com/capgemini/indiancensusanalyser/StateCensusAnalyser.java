@@ -32,8 +32,9 @@ public class StateCensusAnalyser {
 			int recordCount = 0;
 			while(csvIterator.hasNext()) {
 				recordCount++;
+				csvIterator.next();
 			}		
-			log.log(Level.INFO, "Number of records", recordCount);
+			log.info("Number of records : "+recordCount);
 			return recordCount;
 		}
 	}
